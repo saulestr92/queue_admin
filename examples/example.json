@@ -1,0 +1,56 @@
+{
+  "queues": [
+    {
+      "name": "TEST1",
+      "params": {
+        "durable": true,
+        "deadLetterExchange": "EXCHANGE_TEST1",
+        "deadLetterRoutingKey": "error"
+      }
+    },
+    {
+      "name": "TEST2",
+      "params": {
+        "durable": true,
+        "deadLetterExchange": "EXCHANGE_TEST1",
+        "deadLetterRoutingKey": "error"
+      }
+    },
+    {
+      "name": "ERROR",
+      "params": {
+        "durable": true
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "EXCHANGE_TEST1",
+      "type": "direct"
+    }
+  ],
+  "bindings": [
+    {
+      "exchange": "EXCHANGE_TEST1",
+      "key": "test1",
+      "queue": "TEST1"
+    },
+    {
+      "exchange": "EXCHANGE_TEST1",
+      "key": "test2",
+      "queue": "TEST2"
+    },
+    {
+      "exchange": "EXCHANGE_TEST1",
+      "key": "error",
+      "queue": "ERROR"
+    }
+  ],
+  "consumers": [
+    {
+      "queue": "TEST1",
+      "poolSize": 2,
+      "worker": "/home/hugo/Documents/testing/queue_admin/examples/exampleConsumer"
+    }
+  ]
+}
